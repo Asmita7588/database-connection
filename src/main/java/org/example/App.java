@@ -3,9 +3,10 @@ package org.example;
 
 
 import java.sql.*;
+import java.util.Enumeration;
 
 
- class Main {
+class Main {
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/company"; //Database URL
         String user = "root";
@@ -22,6 +23,18 @@ import java.sql.*;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        listDrivers();
     }
-}
+        private static void listDrivers()
+    {
+            Enumeration<Driver> driverList = DriverManager.getDrivers();
+           while( driverList.hasMoreElements()){
+               Driver driverClass = (Driver)driverList.nextElement();
+               System.out.println(driverClass.getClass().getName());
+           }
+
+        }
+
+    }
+
 
